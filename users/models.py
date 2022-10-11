@@ -1,6 +1,14 @@
+import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
+from stdimage import StdImageField
+
+
+def get_file_path(_instance, filename):
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+    return f'users/{filename}'
 
 
 class Address(models.Model):
@@ -20,6 +28,7 @@ class User(AbstractUser):
     email = models.EmailField(max_length=50, unique=True)
     cpf = models.CharField(max_length=11)
     address = models.ForeignKey(Address, verbose_name=_("address"), on_delete=models.CASCADE)
+    image = StdImageField(_('image'), upload_to=get_file_path, variations={'thumb': (400, 400)})
 
     REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'cpf']
     
