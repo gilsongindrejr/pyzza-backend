@@ -41,7 +41,7 @@ class UserAdmin(UserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("first_name", "last_name", "cpf", "email", "password1", "password2"),
+                "fields": ("image", "first_name", "last_name", "cpf", "email", "password1", "password2", 'is_staff'),
             },
         ),
     )
