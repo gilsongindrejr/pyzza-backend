@@ -20,7 +20,14 @@ class Address(models.Model):
     neighborhood = models.CharField(_('neighborhood'), max_length=30)
     street = models.CharField(_('street'), max_length=30)
     house_number = models.CharField(_('house number'), max_length=10)
-    complement = models.CharField(_('complement'), max_length=100)
+    complement = models.CharField(_('complement'), max_length=100, blank=True)
+    
+    class Meta:
+        verbose_name = _('address')
+        verbose_name_plural = _('addresses')
+    
+    def __str__(self):
+        return self.zip_code
     
 
 class CustomUserManager(UserManager):
