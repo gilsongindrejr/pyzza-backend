@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from stdimage import StdImageField
 from django.contrib.auth.hashers import make_password
 from django.apps import apps
+from rest_framework.authtoken.models import Token
 
 
 def get_file_path(_instance, filename):
@@ -50,6 +51,10 @@ class CustomUserManager(UserManager):
         user = self.model(email=email, **extra_fields)
         user.password = make_password(password)
         user.save(using=self._db)
+        
+        if extra_fields.get("is_staff"):
+            Token.objects.create(user=user)
+        
         return user
 
     def create_user(self, email=None, password=None, **extra_fields):
