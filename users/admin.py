@@ -2,7 +2,15 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from .models import User
+from .models import User, Address
+
+
+@admin.register(Address)
+class AddressAdmin(admin.ModelAdmin):
+    list_display = ('zip_code', 'state', 'city', 'neighborhood', 'street', 'house_number', 'complement')
+    list_filter = ('state', 'city', 'neighborhood')
+    search_fields = ('state', 'city', 'neighborhood', 'street', 'house_number', 'complement')
+
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
