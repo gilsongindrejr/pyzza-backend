@@ -1,7 +1,9 @@
 asgiref==3.5.2
 Django==4.1.2
+django-cors-headers==3.13.0
 django-stdimage==6.0.1
 djangorestframework==3.14.0
 Pillow==9.2.0
+psycopg2==2.9.4
 pytz==2022.4
 sqlparse==0.4.3
