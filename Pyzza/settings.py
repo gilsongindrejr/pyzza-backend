@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-t7jbfqya8bfld&8ti@$72orjo7j4o+pc2j!b&i26^3dbsq_6-3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,11 +41,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     
+    'corsheaders',
+    
     'users',
     'products',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -142,3 +145,14 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAdminUser'
     ]
 }
+
+"""
+Until install a proxy
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+"""
+
+# Development only
+CORS_ALLOW_ALL_ORIGINS = True
