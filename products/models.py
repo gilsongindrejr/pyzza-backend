@@ -11,14 +11,14 @@ def get_file_path(_instance, filename):
 
 
 class Category(models.Model):
-    category = models.CharField(_('category'), max_length=30, null=False, blank=False)
+    name = models.CharField(_('name'), max_length=30, null=False, blank=False)
     
     class Meta:
         verbose_name = _('category')
         verbose_name_plural = _('categories')
         
     def __str__(self):
-        return self.category
+        return self.name
 
 
 class Product(models.Model):
