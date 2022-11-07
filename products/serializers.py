@@ -6,10 +6,12 @@ from .models import Category, Product
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'category']
+        fields = ['id', 'name']
 
 
 class ProductSerializer(serializers.ModelSerializer):
+
+    image = serializers.ImageField()
     class Meta:
         model = Product
         fields = ['id', 'name', 'code', 'price', 'description', 'image']
