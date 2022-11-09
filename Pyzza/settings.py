@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'rest_framework',
-    'rest_framework.authtoken',
+    'knox',
     
     'corsheaders',
     
@@ -142,11 +142,8 @@ AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES' : [
-        'rest_framework.authentication.TokenAuthentication'
+        'knox.auth.TokenAuthentication'
     ],
-    'DEFAULT_PERMISSION_CLASSES' : [
-        'rest_framework.permissions.IsAdminUser'
-    ]
 }
 
 """
