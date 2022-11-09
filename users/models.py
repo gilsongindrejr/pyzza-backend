@@ -1,14 +1,10 @@
 import uuid
-from django.conf import settings
-from django.db.models.signals import post_save
 from django.db import models
-from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.hashers import make_password
 from django.apps import apps
 from stdimage import StdImageField
-from rest_framework.authtoken.models import Token
 
 
 def get_file_path(_instance, filename):
@@ -91,9 +87,3 @@ class User(AbstractUser):
         return self.email
     
     objects = CustomUserManager()
-
-
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-    if created:
-        Token.objects.create(user=instance)
