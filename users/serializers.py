@@ -13,7 +13,7 @@ class AddressSerializer(ModelSerializer):
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'first_name', 'last_name', 'cpf', 'image']
+        fields = ['id', 'email', 'first_name', 'last_name', 'cpf', 'image', 'address']
 
 
 class RegisterSerializer(ModelSerializer):

@@ -38,9 +38,16 @@ class LoginAPI(GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
+        serialized_user = UserSerializer(user, context=self.get_serializer_context()).data,
+        serialized_address  = ''
+        if user.address:
+            address = Address.objects.get(pk=serialized_user[0]['address'])
+            serialized_address = AddressSerializer(address).data
+
         _, token = AuthToken.objects.create(user)
         return Response({
-            'user': UserSerializer(user, context=self.get_serializer_context()).data,
+            'user': serialized_user[0],
+            'address': serialized_address,
             'token': token
         })
 
