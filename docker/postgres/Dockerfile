@@ -1,0 +1,7 @@
+FROM postgres:15.0-alpine
+
+ENV POSTGRES_DB=pyzza
+ENV POSTGRES_USER=admin
+ENV POSTGRES_PASSWORD=admin
+
+EXPOSE 5432
