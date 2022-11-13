@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer, Serializer, CharField, ValidationError
 from django.contrib.auth import authenticate
+from django.contrib.auth.password_validation import validate_password
 
 from .models import Address, User
 
@@ -44,3 +45,28 @@ class LoginSerializer(Serializer):
         if user and user.is_active:
             return user
         raise ValidationError('Incorrect Credentials')
+
+
+class ChangePasswordSerializer(Serializer):
+    old_password = CharField(required=True)
+    new_password = CharField(required=True)    
+
+    def validate_new_password(self, value):
+        validate_password(value)
+        return value
+
+
+class UpdateUserSerializer(Serializer):
+    first_name = CharField(required=True)
+    last_name = CharField(required=True)
+    cpf = CharField(required=True)
+
+
+class UpdateAddressSerializer(Serializer):
+    zip_code = CharField(required=True)
+    state = CharField(required=True)
+    city = CharField(required=True)
+    neighborhood = CharField(required=True)
+    street = CharField(required=True)
+    house_number = CharField(required=True)
+    complement = CharField(required=True)
